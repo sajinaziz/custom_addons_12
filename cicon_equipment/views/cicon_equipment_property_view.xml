@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_equipment_prop_value_tree_view" model="ir.ui.view">
+            <field name="name"> equipment.prop.value.tree.view </field>
+            <field name="model">equipment.property.value</field>
+            <field name="arch" type="xml">
+                <tree string="Equipment Property Values" >
+                     <field name="equipment_id"/>
+                     <field name="property_id"/>
+                     <field name="property_value"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_equipment_prop_value_search_view" model="ir.ui.view">
+                <field name="name">equipment.prop.value.search</field>
+                <field name="model">equipment.property.value</field>
+                <field name="arch" type="xml">
+                    <search>
+                       <field name="equipment_id"  widget="selection" />
+                       <filter name="group_equipmen" context="{'group_by': 'equipment_id'}"  string="By Equipment"/>
+                    </search>
+                </field>
+        </record>
+
+
+         <record model="ir.actions.act_window" id="action_hr_equip_property">
+            <field name="name">Equipment Property value</field>
+            <field name="res_model">equipment.property.value</field>
+         </record>
+
+
+
+
+>
+
+
+               <menuitem
+                 name="Equipment Property"
+                 id="hr_equipment_prop_value_menu"
+                 parent="maintenance.menu_maintenance_configuration"
+                 action="action_hr_equip_property"
+                 groups="maintenance.group_equipment_manager"
+                 sequence="90"
+                 />
+
+    </data>
+</odoo>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="hr_equipment_category_view_form_extn" model="ir.ui.view">
+            <field name="name">hr.equipment.category.form.extn</field>
+            <field name="model">maintenance.equipment.category</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_category_view_form"/>
+            <field name="arch" type="xml">
+
+                <field name="note" position="after">
+                    <group string="Properties Information">
+                        <field name="property_ids" widget="many2many_tags"/>
+                    </group>
+
+                </field>
+
+            </field>
+        </record>
+
+        <record id="equipment_status_tree_view" model="ir.ui.view">
+            <field name="name"> equipment.status.tree </field>
+            <field name="model">equipment.status</field>
+            <field name="arch" type="xml">
+                <tree string="Status" editable="bottom">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="hr_equipment_categ_prop_tree_view" model="ir.ui.view">
+            <field name="name"> equipment.category.property.tree </field>
+            <field name="model">equipment.category.property</field>
+            <field name="arch" type="xml">
+                <tree string="Category Properties" editable="bottom">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+       <record id="hr_equipment_view_form_etxn" model="ir.ui.view">
+            <field name="name">maintenance.equipment.form.extn</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//sheet" position="before">
+                    <header>
+                        <field widget="statusbar" name="status_id"  clickable="True"/>
+                    </header>
+                </xpath>
+                <xpath expr="//notebook[last()]" position="inside" >
+                    <page string="Equipment Details">
+                        <field name="property_ids" widget="many2many_tags" invisible="True"/>
+                        <group>
+                            <field name="company_id" options="{'no_open':True,'no_create': True}" />
+                        </group>
+                        <field name="property_value_ids" attrs="{'invisible':[('property_ids','=',[])]}" >
+                            <tree editable="bottom">
+                                <field name="property_id" string="Description" options="{'no_open':True,'no_create': True}" domain="[('id','in',parent.property_ids[0][2])]"/>
+                                <field name="property_value" string="" />
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Related Equipments">
+                        <group>
+                            <field name="connected_to_equip_ids" widget="many2many_tags"/>
+                            <field name="connected_from_equip_ids" widget="many2many_tags"/>
+                        </group>
+                    </page>
+
+                </xpath>
+
+                 <field name="serial_no" position="after">
+                     <!--<label for="asset_code" class="oe_edit_only"/>-->
+                     <!--<field name="asset_code"/>-->
+                 </field>
+
+
+            </field>
+        </record>
+
+
+
+
+             <record model="ir.actions.act_window" id="action_hr_equip_categ_property">
+                <field name="name">Category Property</field>
+                <field name="res_model">equipment.category.property</field>
+            </record>
+
+             <record model="ir.actions.act_window" id="action_hr_equip_status">
+                <field name="name">Equipment Status</field>
+                <field name="res_model">equipment.status</field>
+            </record>
+
+
+
+
+
+          <menuitem
+            id="menu_equip_categ_prop"
+            parent="maintenance.menu_maintenance_configuration"
+            action="action_hr_equip_categ_property"
+            groups="base.group_no_one"
+            sequence="99"/>
+
+         <menuitem
+            id="menu_equip_status"
+            parent="maintenance.menu_maintenance_configuration"
+            action="action_hr_equip_status"
+            groups="base.group_no_one"
+            sequence="99"/>
+
+
+
+</data>
+</odoo>
