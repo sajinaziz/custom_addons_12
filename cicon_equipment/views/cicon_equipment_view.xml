@@ -50,6 +50,9 @@
                         <field widget="statusbar" name="status_id"  clickable="True"/>
                     </header>
                 </xpath>
+                <field name="location" position="after">
+                    <field name="internal_ref" readonly="1" />
+                </field>
                 <xpath expr="//notebook[last()]" position="inside" >
                     <page string="Equipment Details">
                         <field name="property_ids" widget="many2many_tags" invisible="True"/>

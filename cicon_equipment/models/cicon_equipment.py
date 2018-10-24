@@ -7,7 +7,7 @@ class EquipmentCategoryProperty(models.Model):
 
     name = fields.Char('Property Name', required=True)
 
-    _sql_constraints = [('uniq_name', 'UNIQUE(name)', "Property Name Should be Unique" )]
+    _sql_constraints = [('uniq_name', 'UNIQUE(name)', "Property Name Should be Unique")]
 
 
 class EquipmentStatus(models.Model):
@@ -40,6 +40,7 @@ class MaintenanceEquipment(models.Model):
         _status = self.env['equipment.status'].search([], order='sequence', limit=1)
         return _status
 
+    internal_ref = fields.Char('Internal Ref', default='New')
     property_ids = fields.Many2many(related='category_id.property_ids', store=False, string="Properties")
     property_value_ids = fields.One2many('equipment.property.value', 'equipment_id', string="Property Values")
     status_id = fields.Many2one('equipment.status', string='Status', track_visibility='onchange', default=_get_default_status)
@@ -47,6 +48,12 @@ class MaintenanceEquipment(models.Model):
                                         ,'con_to_equip_id', string="Connected to")
     connected_from_equip_ids = fields.Many2many('maintenance.equipment', 'equipment_equip_rel', 'con_to_equip_id'
                                               , 'con_from_equip_id', string="Connected from ", readonly=True)
+
+    @api.model
+    def create(self, vals):
+        if vals.get('internal_ref', 'New') == 'New':
+            vals['internal_ref'] = self.env['ir.sequence'].next_by_code('cicon.equip.internal.seq') or '/'
+        return super(MaintenanceEquipment, self).create(vals)
 
     #_sql_constraints = [('UniqueAsset', 'UNIQUE(asset_code)', 'Asset Name Should be Unique !')]
 
@@ -56,7 +63,5 @@ class MaintenanceEquipmentCategory(models.Model):
 
     property_ids = fields.Many2many('equipment.category.property', 'hr_equipment_categ_property_rel',
                                     'category_id', "property_id", string="Properties")
-
-
 
 
