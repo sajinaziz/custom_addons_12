@@ -61,7 +61,7 @@
                         </group>
                         <field name="property_value_ids" attrs="{'invisible':[('property_ids','=',[])]}" >
                             <tree editable="bottom">
-                                <field name="property_id" string="Description" options="{'no_open':True,'no_create': True}" domain="[('id','in',parent.property_ids[0][2])]"/>
+                                <field name="property_id" string="Description" options="{'no_open':True,'no_create': True}" domain="[('id','in',parent.property_ids)]"/>
                                 <field name="property_value" string="" />
                             </tree>
                         </field>
