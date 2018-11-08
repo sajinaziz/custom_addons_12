@@ -56,9 +56,9 @@
                 <xpath expr="//notebook[last()]" position="inside" >
                     <page string="Equipment Details">
                         <field name="property_ids" widget="many2many_tags" invisible="True"/>
-                        <group>
-                            <field name="company_id" options="{'no_open':True,'no_create': True}" />
-                        </group>
+                        <!--<group>-->
+                            <!--<field name="company_id" options="{'no_open':True,'no_create': True}" />-->
+                        <!--</group>-->
                         <field name="property_value_ids" attrs="{'invisible':[('property_ids','=',[])]}" >
                             <tree editable="bottom">
                                 <field name="property_id" string="Description" options="{'no_open':True,'no_create': True}" domain="[('id','in',parent.property_ids)]"/>
