@@ -19,6 +19,11 @@
             <field name="arch" type="xml">
                 <form string="User Identity">
                     <sheet>
+                    <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-check" confirm="Confirm Change !">
+                                <field name="active" widget="boolean_button" options='{"terminology": "active"}'/>
+                            </button>
+                     </div>
                     <group>
                         <field name="identity_type_id" />
                         <field name="name"/>
@@ -61,6 +66,7 @@
                     <field name="identity_type_id"  widget="selection"/>
                     <field name="user_name" />
                     <field name="company_id"  widget="selection"/>
+                    <filter name="show_inactive" string="Inactive" domain="[('active','=',False)]"/>
                 </search>
             </field>
 

@@ -7,6 +7,7 @@ access_equip_prop_val_admin,equip.prop.val.admin,model_equipment_property_value,
 access_equipment_category_admin,equipment.category.admin,model_maintenance_equipment_category,maintenance.group_equipment_manager,1,1,1,0
 access_equip_status_admin,equip.status.admin,model_equipment_status,maintenance.group_equipment_manager,1,1,1,1
 access_equip_user_iden_type_admin,cic.usr.iden.type.admin,model_cicon_user_identity_type,maintenance.group_equipment_manager,1,1,1,1
-access_equip_pword_code_admin,cic.usr.pword.code.admin,model_cicon_password_code,maintenance.group_equipment_manager,1,1,1,1
+access_equip_pword_code_admin,cic.usr.pword.code.admin,model_cicon_password_code,maintenance.group_equipment_manager,1,0,0,0
+access_equip_pword_code_it,cic.usr.pword.code.it,model_cicon_password_code,group_cicon_it_admin,1,1,1,1
 access_user_identity_admin,cic.usr.identity.admin,model_cicon_user_identity,maintenance.group_equipment_manager,1,1,1,1
 

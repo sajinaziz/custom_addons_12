@@ -15,7 +15,7 @@ class CiconPasswordCode(models.Model):
     _description = "CICON Password Code"
 
     name = fields.Char('Password Code', required=True)
-    pword = fields.Char('Password ', required=True)
+    pword = fields.Char('Password ', required=True, groups='cicon_equipment.group_cicon_it_admin')
 
     _sql_constraints = [('unique_name', 'UNIQUE(name)', 'Password Code should be Unique!')]
 
@@ -30,13 +30,14 @@ class CiconUserIdentity(models.Model):
     identity_type_id = fields.Many2one('cicon.user.identity.type', string="Identity Type", required=True, visibility='onchange')
     user_name = fields.Char('User Id / Name', visibility='onchange')
     pword_type = fields.Selection([('text', 'Text'), ('code', 'Code')], default='text', string="Password Type", visibility='onchange')
-    pword_text = fields.Char('Password (Text)', visibility='onchange')
-    pass_code_id = fields.Many2one('cicon.password.code', string='Password Code', visibility='onchange')
+    pword_text = fields.Char('Password (Text)', visibility='onchange', copy=False)
+    pass_code_id = fields.Many2one('cicon.password.code', string='Password Code', visibility='onchange', copy=False)
     notes = fields.Text('Notes')
     user_id = fields.Many2one('res.users', string="Created By", default=lambda self: self.env.user.id, required=True)
     company_id = fields.Many2one('res.company', string="Company", default=lambda self: self.env.user.company_id.id)
     related_equipment_ids = fields.Many2many('maintenance.equipment', 'cicon_equipment_user_identity_rel',
                                          'user_identity_id', 'equipment_id', string='Equipments', readonly=True)
+    active = fields.Boolean('Active',default=True)
 
     _sql_constraints = [('unique_name', 'UNIQUE(name)', 'Title should be Unique!')]
 

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<odoo>-->
+<odoo>
 
 
-    <!--<record id="group_cicon_it_admin" model="res.groups">-->
-        <!--<field name="name">IT Admin</field>-->
-        <!--<field name="implied_ids" eval="[(4, ref('maintenance.group_equipment_manager'))]"/>-->
-        <!--<field name="comment">the user will be able to Manage Equipment Manger Group (Support Admins).</field>-->
-    <!--</record>-->
+    <record id="group_cicon_it_admin" model="res.groups">
+        <field name="name">IT Admin</field>
+        <field name="category_id" ref="base.module_category_human_resources"/>
+        <field name="implied_ids" eval="[(4, ref('maintenance.group_equipment_manager'))]"/>
+        <field name="comment">Admin Manage Equipment Manger Group (Support Admins).</field>
+    </record>
 
 
     <!--&lt;!&ndash; Rules &ndash;&gt;-->
@@ -46,4 +47,4 @@
         <!--<field name="implied_ids" eval="[(3, ref('maintenance.group_equipment_manager'))]"/>-->
     <!--</record>-->
 
-<!--</odoo>-->
+</odoo>

@@ -9,7 +9,7 @@
     'category': 'CICON IT',
     'depends': ['hr_maintenance','maintenance'],
     'data': [
-        #'security/cicon_hr_equipment_security.xml',
+        'security/cicon_equipment_security.xml',
         'security/ir.model.access.csv',
         'views/cicon_equipment_view.xml',
         'views/cicon_equipment_property_view.xml',
