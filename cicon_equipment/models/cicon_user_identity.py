@@ -41,6 +41,15 @@ class CiconUserIdentity(models.Model):
 
     _sql_constraints = [('unique_name', 'UNIQUE(name)', 'Title should be Unique!')]
 
+    @api.multi
+    @api.returns('self', lambda value: value.id)
+    def copy(self, default=None):
+        self.ensure_one()
+        default = dict(default or {})
+        if 'name' not in default:
+            default['name'] = "%s (copy)" % self.name
+        return super(CiconUserIdentity, self).copy(default=default)
+
 
 class MaintenanceEquipment(models.Model):
     _inherit = 'maintenance.equipment'
