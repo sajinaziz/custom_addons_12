@@ -26,18 +26,18 @@ class CiconUserIdentity(models.Model):
 
     _inherit = ['mail.thread']
 
-    name = fields.Char('Title', required=True, visibility='onchange')
-    identity_type_id = fields.Many2one('cicon.user.identity.type', string="Identity Type", required=True, visibility='onchange')
-    user_name = fields.Char('User Id / Name', visibility='onchange')
-    pword_type = fields.Selection([('text', 'Text'), ('code', 'Code')], default='text', string="Password Type", visibility='onchange')
-    pword_text = fields.Char('Password (Text)', visibility='onchange', copy=False)
-    pass_code_id = fields.Many2one('cicon.password.code', string='Password Code', visibility='onchange', copy=False)
+    name = fields.Char('Title', required=True, track_visibility='onchange')
+    identity_type_id = fields.Many2one('cicon.user.identity.type', string="Identity Type", required=True, track_visibility='onchange')
+    user_name = fields.Char('User Id / Name', track_visibility='onchange')
+    pword_type = fields.Selection([('text', 'Text'), ('code', 'Code')], default='text', string="Password Type", track_visibility='onchange')
+    pword_text = fields.Char('Password (Text)', track_visibility='onchange', copy=False)
+    pass_code_id = fields.Many2one('cicon.password.code', string='Password Code', track_visibility='onchange', copy=False)
     notes = fields.Text('Notes')
     user_id = fields.Many2one('res.users', string="Created By", default=lambda self: self.env.user.id, required=True)
     company_id = fields.Many2one('res.company', string="Company", default=lambda self: self.env.user.company_id.id)
     related_equipment_ids = fields.Many2many('maintenance.equipment', 'cicon_equipment_user_identity_rel',
                                          'user_identity_id', 'equipment_id', string='Equipments', readonly=True)
-    active = fields.Boolean('Active',default=True)
+    active = fields.Boolean('Active',default=True, track_visibility='onchange')
 
     _sql_constraints = [('unique_name', 'UNIQUE(name)', 'Title should be Unique!')]
 
