@@ -40,7 +40,7 @@ class MaintenanceEquipment(models.Model):
         _status = self.env['equipment.status'].search([], order='sequence', limit=1)
         return _status
 
-    internal_ref = fields.Char('Internal Ref', default='New')
+    internal_ref = fields.Char('Internal Ref', default='New', copy=False)
     property_ids = fields.Many2many(related='category_id.property_ids', store=False, string="Properties")
     property_value_ids = fields.One2many('equipment.property.value', 'equipment_id', string="Property Values")
     status_id = fields.Many2one('equipment.status', string='Status', track_visibility='onchange', default=_get_default_status)
