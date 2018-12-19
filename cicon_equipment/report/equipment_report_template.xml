@@ -7,36 +7,36 @@
                 <h2
                 ><center><b>EQUIPMENT REPORT</b></center></h2>
                 <div class="container">
-                    <table class="table table-bordered">
+                    <table class="table">
                         <tbody>
                             <tr>
-                                <th scope="row">Name</th>
+                                <th>Name</th>
                                 <td> <span t-field="doc.name" /> </td>
-                                <td><b>Category</b></td>
+                                <th>Category</th>
                                 <td> <span t-field="doc.category_id.name" /> </td>
-                                <td><b>Model</b></td>
+                                <th>Model</th>
                                 <td> <span t-field="doc.model" /> </td>
                             </tr>
                             <tr>
-                                <th scope="row">Serial Number</th>
+                                <th>Serial Number</th>
                                 <td> <span t-field="doc.serial_no" /> </td>
-                                <td><b>Used By</b></td>
+                                <th>Used By</th>
                                 <td>
-                                    <p t-if="doc.equipment_assign_to == 'department'">
+                                    <t t-if="doc.equipment_assign_to == 'department'">
                                         <span t-field="doc.department_id.name"/>
-                                    </p>
-                                    <p t-elif="doc.equipment_assign_to == 'employee'">
+                                    </t>
+                                    <t t-elif="doc.equipment_assign_to == 'employee'">
                                         <span t-field="doc.employee_id.name"/>
-                                    </p>
-                                    <p t-else="doc.equipment_assign_to == 'other'">
+                                    </t>
+                                    <t t-else="doc.equipment_assign_to == 'other'">
                                         <span t-field="doc.location"/>
-                                    </p>
+                                    </t>
                                 </td>
-                                <td><b>Location</b></td>
+                                <th> Location </th>
                                 <td> <span t-field="doc.location" /> </td>
                             </tr>
                             <tr>
-                                <th scope="row">Company Name</th>
+                                <th>Company Name</th>
                                 <td> <span t-field="doc.company_id.name" /> </td>
                             </tr>
                         </tbody>
