@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="action_report_equipment_history"
+            string="History Card"
+            model="maintenance.equipment"
+            report_type="qweb-pdf"
+            file="cicon_equipment.report_history_card"
+            name="cicon_equipment.report_history_card"
+
+        />
+        <report
+            id="action_report_equipment_summary"
+            string="Summary Report"
+            model="maintenance.equipment"
+            report_type="qweb-pdf"
+            file="cicon_equipment.report_summary_card"
+            name="cicon_equipment.report_summary_card"
+
+        />
+
+    </data>
+</odoo>

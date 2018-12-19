@@ -15,6 +15,12 @@
         'views/cicon_equipment_property_view.xml',
         'views/cicon_user_identity_view.xml',
         'views/cicon_equipment_seq.xml',
+        'report/equipment_report.xml',
+        'report/equipment_report_template.xml',
+        'report/equipments_report_template_summary.xml',
+        'report/maintenance_report.xml',
+        'report/maintenance_report_template.xml',
+
     ],
     'update_xml': [],
     'description': 'CICON Applications',

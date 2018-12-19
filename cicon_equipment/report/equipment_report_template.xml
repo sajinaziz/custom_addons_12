@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_historycard_document">
+        <t t-call="web.internal_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <h2
+                ><center><b>EQUIPMENT REPORT</b></center></h2>
+                <div class="container">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Name</th>
+                                <td> <span t-field="doc.name" /> </td>
+                                <td><b>Category</b></td>
+                                <td> <span t-field="doc.category_id.name" /> </td>
+                                <td><b>Model</b></td>
+                                <td> <span t-field="doc.model" /> </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Serial Number</th>
+                                <td> <span t-field="doc.serial_no" /> </td>
+                                <td><b>Used By</b></td>
+                                <td>
+                                    <p t-if="doc.equipment_assign_to == 'department'">
+                                        <span t-field="doc.department_id.name"/>
+                                    </p>
+                                    <p t-elif="doc.equipment_assign_to == 'employee'">
+                                        <span t-field="doc.employee_id.name"/>
+                                    </p>
+                                    <p t-else="doc.equipment_assign_to == 'other'">
+                                        <span t-field="doc.location"/>
+                                    </p>
+                                </td>
+                                <td><b>Location</b></td>
+                                <td> <span t-field="doc.location" /> </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Company Name</th>
+                                <td> <span t-field="doc.company_id.name" /> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <table class="table table-striped">
+                        <thead>
+                            <th> Sno</th>
+                            <th> Property </th>
+                            <th> Description</th>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="doc.property_value_ids" t-as="pr">
+                                <td> <span t-esc="pr_index +1"/> </td>
+                                <td> <span t-field="pr.property_id.name" /> </td>
+                                 <td> <span t-field="pr.property_value" /> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5>Log Note</h5>
+                    <table class="table table-striped">
+                        <thead>
+                           <!-- <th> Sno</th>-->
+                            <th> Date </th>
+                            <th> Subject</th>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="doc.message_ids" t-as="msg">
+                                <t t-if="msg.body">
+                                    <!--<td> <span t-esc="msg_index +1"/> </td>-->
+                                    <td> <span t-field="msg.date" /> </td>
+                                    <td> <span t-field="msg.body" /> </td>
+                                </t>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h5>Maintenance</h5>
+                    <table class="table table-striped">
+                       <thead>
+                            <th> Sno</th>
+                            <th> Subject </th>
+                            <th> Request Date</th>
+                            <th> Stage</th>
+                       </thead>
+                            <tbody>
+                                <tr t-foreach="doc.maintenance_ids" t-as="m">
+                                    <td> <span t-esc="m_index +1"/> </td>
+                                    <td> <span t-field="m.name" /> </td>
+                                    <td> <span t-field="m.request_date" /> </td>
+                                    <td> <span t-field="m.stage_id" /> </td>
+                                </tr>
+                            </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_history_card">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="cicon_equipment.report_historycard_document" />
+            </t>
+        </t>
+    </template>
+
+
+
+</odoo>
