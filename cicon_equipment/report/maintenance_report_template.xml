@@ -6,7 +6,7 @@
              <t t-call="web.internal_layout">
             <div class="page">
                 <div class="oe_structure"/>
-                <h2><center><b>MAINTENANCE SUMMARY</b></center></h2>
+                <h2><center><b> MAINTENANCE SUMMARY </b></center></h2>
                     <table class="table table-striped">
                         <thead>
                             <th> Sno</th>
