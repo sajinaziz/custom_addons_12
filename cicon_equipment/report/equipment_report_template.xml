@@ -58,7 +58,7 @@
                         </tbody>
                     </table>
 
-                    <h5>Log Note</h5>
+                    <h6>Log Note</h6>
                     <table class="table table-striped">
                         <thead>
                            <!-- <th> Sno</th>-->
