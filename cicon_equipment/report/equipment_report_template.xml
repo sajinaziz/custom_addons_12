@@ -59,10 +59,11 @@
                     </table>
 
                     <h6>Log Note</h6>
+
                     <table class="table table-striped">
                         <thead>
                            <!-- <th> Sno</th>-->
-                            <th> Date </th>
+                            <th> Date</th>
                             <th> Subject</th>
                         </thead>
                         <tbody>
