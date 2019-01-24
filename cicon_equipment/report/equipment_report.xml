@@ -5,7 +5,7 @@
             id="action_report_equipment_history"
             string="History Card"
             model="maintenance.equipment"
-            report_type="qweb-pdf"
+            report_type="qweb-html"
             file="cicon_equipment.report_history_card"
             name="cicon_equipment.report_history_card"
 
@@ -14,7 +14,7 @@
             id="action_report_equipment_summary"
             string="Summary Report"
             model="maintenance.equipment"
-            report_type="qweb-pdf"
+            report_type="qweb-html"
             file="cicon_equipment.report_summary_card"
             name="cicon_equipment.report_summary_card"
 

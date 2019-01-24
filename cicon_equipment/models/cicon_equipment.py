@@ -55,7 +55,7 @@ class MaintenanceEquipment(models.Model):
             vals['internal_ref'] = self.env['ir.sequence'].next_by_code('cicon.equip.internal.seq') or '/'
         return super(MaintenanceEquipment, self).create(vals)
 
-    #_sql_constraints = [('UniqueAsset', 'UNIQUE(asset_code)', 'Asset Name Should be Unique !')]
+      #_sql_constraints = [('UniqueAsset', 'UNIQUE(asset_code)', 'Asset Name Should be Unique !')]
 
 
 class MaintenanceEquipmentCategory(models.Model):
