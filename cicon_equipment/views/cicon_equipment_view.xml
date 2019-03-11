@@ -75,6 +75,12 @@
 
                 </xpath>
 
+                <xpath expr="//group[@name='maintenance']" position="after">
+                    <group>
+                         <field name="pm_note"/>
+                    </group>
+                </xpath>
+
                  <field name="serial_no" position="after">
                      <!--<label for="asset_code" class="oe_edit_only"/>-->
                      <!--<field name="asset_code"/>-->

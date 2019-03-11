@@ -48,6 +48,7 @@ class MaintenanceEquipment(models.Model):
                                         ,'con_to_equip_id', string="Connected to")
     connected_from_equip_ids = fields.Many2many('maintenance.equipment', 'equipment_equip_rel', 'con_to_equip_id'
                                               , 'con_from_equip_id', string="Connected from ", readonly=True)
+    pm_note = fields.Text('PM Notes')
 
     @api.model
     def create(self, vals):
@@ -56,6 +57,24 @@ class MaintenanceEquipment(models.Model):
         return super(MaintenanceEquipment, self).create(vals)
 
       #_sql_constraints = [('UniqueAsset', 'UNIQUE(asset_code)', 'Asset Name Should be Unique !')]
+
+    def _create_new_request(self, date):
+        # Override to add company id as per equipment
+        self.ensure_one()
+        self.env['maintenance.request'].create({
+            'name': 'PM-%s' % self.name,
+            'request_date': date,
+            'schedule_date': date,
+            'category_id': self.category_id.id,
+            'equipment_id': self.id,
+            'maintenance_type': 'preventive',
+            'owner_user_id': self.owner_user_id.id,
+            'user_id': self.technician_user_id.id,
+            'maintenance_team_id': self.maintenance_team_id.id,
+            'duration': self.maintenance_duration,
+            'company_id': self.company_id.id,
+            'description': self.pm_note
+        })
 
 
 class MaintenanceEquipmentCategory(models.Model):
