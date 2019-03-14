@@ -40,6 +40,20 @@
             </field>
         </record>
 
+
+        <record id="hr_equipment_view_pivot" model="ir.ui.view">
+            <field name="name">maintenance.equipment.pivot</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="company_id" type="row"/>
+                    <field name="category_id" type="row"/>
+                </pivot>
+
+            </field>
+        </record>
+
+
        <record id="hr_equipment_view_form_etxn" model="ir.ui.view">
             <field name="name">maintenance.equipment.form.extn</field>
             <field name="model">maintenance.equipment</field>
@@ -93,6 +107,7 @@
 
 
 
+
              <record model="ir.actions.act_window" id="action_hr_equip_categ_property">
                 <field name="name">Category Property</field>
                 <field name="res_model">equipment.category.property</field>
@@ -104,7 +119,25 @@
             </record>
 
 
+        <record id="equipment_action_reports" model="ir.actions.act_window">
+            <field name="name">Equipments</field>
+            <field name="res_model">maintenance.equipment</field>
+            <field name="view_mode">pivot,kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add a new Equipment
+                </p><p>
+                    Follow the process of the request and communicate with the collaborator.
+                </p>
+            </field>
+        </record>
 
+
+
+          <menuitem
+                id="equipment_reporting"
+                action="equipment_action_reports"
+                parent="maintenance.maintenance_reporting"/>
 
 
           <menuitem
