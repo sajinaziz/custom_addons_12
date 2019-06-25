@@ -40,6 +40,15 @@ class MaintenanceEquipment(models.Model):
         _status = self.env['equipment.status'].search([], order='sequence', limit=1)
         return _status
 
+    @api.multi
+    def _get_ip_primary(self):
+        _ip_id = self.env.ref('cicon_equipment.equipment_default_property_ip').id
+        for rec in self:
+            if rec.property_value_ids:
+                _ip_prop = rec.property_value_ids.filtered(lambda a: a.property_id.id == _ip_id).property_value or ''
+                rec.primary_ip = _ip_prop
+
+    primary_ip = fields.Char(string="IP Address(Primary)",compute=_get_ip_primary)
     internal_ref = fields.Char('Internal Ref', default='New', copy=False)
     property_ids = fields.Many2many(related='category_id.property_ids', store=False, string="Properties")
     property_value_ids = fields.One2many('equipment.property.value', 'equipment_id', string="Property Values")
