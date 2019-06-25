@@ -66,6 +66,7 @@
                 </xpath>
                 <field name="location" position="after">
                     <field name="internal_ref" readonly="1" />
+                    <field name="primary_ip"/>
                 </field>
                 <xpath expr="//notebook[last()]" position="inside" >
                     <page string="Equipment Details">

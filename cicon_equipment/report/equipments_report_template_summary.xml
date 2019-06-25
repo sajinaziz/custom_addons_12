@@ -10,25 +10,23 @@
                     <table class="table table-striped">
                         <thead>
                             <th> Sno</th>
-                            <th> Company Name</th>
                             <th> Name</th>
                             <th> Category</th>
                             <th> Model</th>
                             <th> Serial Number</th>
                             <th> Location</th>
-                            <th> Properties </th>
+                            <th> Company Name</th>
+
                         </thead>
                         <tbody>
                             <tr t-foreach="docs" t-as="doc">
                                 <td> <span t-esc="doc_index +1"/> </td>
-                                <td> <span t-field="doc.company_id.name" /></td>
                                 <td> <span t-field="doc.name" /></td>
                                  <td> <span t-field="doc.category_id.name" /> </td>
                                 <td> <span t-field="doc.model" /></td>
                                 <td> <span t-field="doc.serial_no" /> </td>
                                 <td> <span t-field="doc.location" /></td>
-                                <td> <span t-esc="len(doc.property_value_ids)" /> </td>
-
+                                <td> <span t-field="doc.company_id.name" /></td>
                             </tr>
                         </tbody>
                     </table>
