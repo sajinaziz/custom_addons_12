@@ -11,5 +11,5 @@ access_equip_pword_code_admin,cic.usr.pword.code.admin,model_cicon_password_code
 access_equip_pword_code_it,cic.usr.pword.code.it,model_cicon_password_code,group_cicon_it_admin,1,1,1,1
 access_user_identity_admin,cic.usr.identity.admin,model_cicon_user_identity,maintenance.group_equipment_manager,1,1,1,1
 access_maint_request_line_user,cic.maint.request.line.user,model_cicon_maintenance_request_line,base.group_user,1,0,0,0
-access_maint_request_line_admin,cic.maint.request.line.admin,model_cicon_maintenance_request_line,maintenance.group_equipment_manager,1,1,1,1c
+access_maint_request_line_admin,cic.maint.request.line.admin,model_cicon_maintenance_request_line,maintenance.group_equipment_manager,1,1,1,1
 
