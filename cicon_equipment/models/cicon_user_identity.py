@@ -38,6 +38,7 @@ class CiconUserIdentity(models.Model):
     related_equipment_ids = fields.Many2many('maintenance.equipment', 'cicon_equipment_user_identity_rel',
                                          'user_identity_id', 'equipment_id', string='Equipments', readonly=True)
     active = fields.Boolean('Active',default=True, track_visibility='onchange')
+    assigned_employee_id = fields.Many2one('hr.employee', 'Employee Assigned')
 
     _sql_constraints = [('unique_name', 'UNIQUE(name)', 'Title should be Unique!')]
 

@@ -7,7 +7,7 @@
     'description': """CICON Equipment""",
     'website': 'http://www.cicon.net',
     'category': 'CICON IT',
-    'depends': ['hr_maintenance','maintenance'],
+    'depends': ['hr_maintenance','maintenance', 'purchase'],
     'data': [
         'security/cicon_equipment_security.xml',
         'security/ir.model.access.csv',
@@ -15,6 +15,7 @@
         'views/cicon_equipment_property_view.xml',
         'views/cicon_user_identity_view.xml',
         'views/cicon_equipment_seq.xml',
+        'views/cicon_maintenance_request_view.xml',
         'report/equipment_report.xml',
         'report/equipment_report_template.xml',
         'report/equipments_report_template_summary.xml',
