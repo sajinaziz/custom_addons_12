@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <record id="hr_equipment_request_view_form_etxn" model="ir.ui.view">
+            <field name="name">equipment.request.form.extn</field>
+            <field name="model">maintenance.request</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+            <field name="arch" type="xml">
+
+                <field name="description" position="replace">
+                    <notebook>
+                        <page string="Description">
+                            <field name='description' placeholder="Internal Note ......."/>
+                        </page>
+                        <page string="Parts / Services">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="purchase_order_id"  options="{'no_open':False,'no_create': True}" />
+                                    <field name="purchase_order_line_id" options="{'no_open':True,'no_create': True}" />
+                                    <field name="line_date" />
+                                    <field name="description"/>
+                                    <field name="product_qty"/>
+                                    <field name="product_uom"/>
+                                    <field name="price_unit"/>
+                                    <field name="taxes_id" widget="many2many_tags"/>
+                                    <field name="price_subtotal"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="line_date"/>
+                                            <field name="purchase_order_id"  options="{'no_open':False,'no_create': True}" />
+                                            <field name="purchase_order_line_id" options="{'no_open':True,'no_create': True}" />
+                                            <field name="description"/>
+                                            <field name="product_uom"/>
+                                        </group>
+                                        <group>
+                                            <field name="product_qty"/>
+                                            <field name="price_unit"/>
+                                            <field name="taxes_id" widget="many2many_tags"/>
+                                            <field name="price_subtotal"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+
+                        </page>
+
+                    </notebook>
+                </field>
+
+            </field>
+       </record>
+
+
+
+    </data>
+</odoo>
