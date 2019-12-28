@@ -40,7 +40,7 @@ class CiconUserIdentity(models.Model):
     active = fields.Boolean('Active',default=True, track_visibility='onchange')
     assigned_employee_id = fields.Many2one('hr.employee', 'Employee Assigned')
 
-    _sql_constraints = [('unique_name', 'UNIQUE(name)', 'Title should be Unique!')]
+    _sql_constraints = [('unique_name', 'UNIQUE(name, identity_type_id)', 'Title should be Unique!')]
 
     @api.multi
     @api.returns('self', lambda value: value.id)

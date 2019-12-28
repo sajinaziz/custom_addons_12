@@ -19,12 +19,12 @@
                                     <field name="purchase_order_id"  options="{'no_open':False,'no_create': True}" />
                                     <field name="purchase_order_line_id" options="{'no_open':True,'no_create': True}" />
                                     <field name="line_date" />
-                                    <field name="description"/>
                                     <field name="product_qty"/>
                                     <field name="product_uom"/>
                                     <field name="price_unit"/>
-                                    <field name="taxes_id" widget="many2many_tags"/>
                                     <field name="price_subtotal"/>
+                                    <field name="price_tax" />
+                                    <field name="price_total" sum="Total"/>
                                 </tree>
                                 <form>
                                     <group>
@@ -32,14 +32,14 @@
                                             <field name="line_date"/>
                                             <field name="purchase_order_id"  options="{'no_open':False,'no_create': True}" />
                                             <field name="purchase_order_line_id" options="{'no_open':True,'no_create': True}" />
-                                            <field name="description"/>
                                             <field name="product_uom"/>
                                         </group>
                                         <group>
                                             <field name="product_qty"/>
                                             <field name="price_unit"/>
-                                            <field name="taxes_id" widget="many2many_tags"/>
                                             <field name="price_subtotal"/>
+                                            <field name="price_tax" />
+                                            <field name="price_total"/>
                                         </group>
                                     </group>
                                 </form>

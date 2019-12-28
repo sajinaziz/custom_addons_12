@@ -48,16 +48,25 @@ class MaintenanceEquipment(models.Model):
                 _ip_prop = rec.property_value_ids.filtered(lambda a: a.property_id.id == _ip_id).property_value or ''
                 rec.primary_ip = _ip_prop
 
+    @api.multi
+    def _calc_expense(self):
+        for _rec in self:
+            _lines = _rec.maintenance_ids.mapped('line_ids')
+            _rec.part_line_ids = _lines
+            _rec.total_expense = (sum(l.price_total for l in _lines))
+
     primary_ip = fields.Char(string="IP Address(Primary)",compute=_get_ip_primary)
     internal_ref = fields.Char('Internal Ref', default='New', copy=False)
     property_ids = fields.Many2many(related='category_id.property_ids', store=False, string="Properties")
     property_value_ids = fields.One2many('equipment.property.value', 'equipment_id', string="Property Values")
     status_id = fields.Many2one('equipment.status', string='Status', track_visibility='onchange', default=_get_default_status)
     connected_to_equip_ids = fields.Many2many('maintenance.equipment', 'equipment_equip_rel', 'con_from_equip_id'
-                                        ,'con_to_equip_id', string="Connected to")
+                                        , 'con_to_equip_id', string="Connected to")
     connected_from_equip_ids = fields.Many2many('maintenance.equipment', 'equipment_equip_rel', 'con_to_equip_id'
                                               , 'con_from_equip_id', string="Connected from ", readonly=True)
     pm_note = fields.Text('PM Notes')
+    total_expense = fields.Float(compute=_calc_expense, string='Total Expense', readonly=True)
+    part_line_ids = fields.Many2many('cicon.maintenance.request.line', compute=_calc_expense, string='Parts', readonly=True)
 
     @api.model
     def create(self, vals):

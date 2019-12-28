@@ -13,6 +13,7 @@
                         <field name="property_ids" widget="many2many_tags"/>
                     </group>
 
+
                 </field>
 
             </field>
@@ -67,6 +68,7 @@
                 <field name="location" position="after">
                     <field name="internal_ref" readonly="1" />
                     <field name="primary_ip"/>
+                    <field name="total_expense"/>
                 </field>
                 <xpath expr="//notebook[last()]" position="inside" >
                     <page string="Equipment Details">
@@ -86,6 +88,21 @@
                             <field name="connected_to_equip_ids" widget="many2many_tags"/>
                             <field name="connected_from_equip_ids" widget="many2many_tags"/>
                         </group>
+                    </page>
+                    <page string="Parts">
+                            <field name="part_line_ids" >
+                                <tree>
+                                    <field name="purchase_order_id"/>
+                                    <field name="purchase_order_line_id"/>
+                                    <field name="line_date" />
+                                    <field name="product_qty"/>
+                                    <field name="product_uom"/>
+                                    <field name="price_unit"/>
+                                    <field name="price_subtotal" sum="Total" />
+                                    <field name="price_tax"  sum="Total"/>
+                                    <field name="price_total" sum="Total"/>
+                                </tree>
+                            </field>
                     </page>
 
                 </xpath>

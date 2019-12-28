@@ -14,19 +14,20 @@
                             <th> Category</th>
                             <th> Model</th>
                             <th> Serial Number</th>
+                            <th> IP Primary </th>
                             <th> Location</th>
-                            <th> Company Name</th>
-
+                            <th> Company</th>
                         </thead>
                         <tbody>
                             <tr t-foreach="docs" t-as="doc">
                                 <td> <span t-esc="doc_index +1"/> </td>
-                                <td> <span t-field="doc.name" /></td>
-                                 <td> <span t-field="doc.category_id.name" /> </td>
-                                <td> <span t-field="doc.model" /></td>
+                                <td> <span t-field="doc.name" /> </td>
+                                <td> <span t-field="doc.category_id.name" /> </td>
+                                <td> <span t-field="doc.model" /> </td>
                                 <td> <span t-field="doc.serial_no" /> </td>
-                                <td> <span t-field="doc.location" /></td>
-                                <td> <span t-field="doc.company_id.name" /></td>
+                                <td> <span t-field="doc.primary_ip" /> </td>
+                                <td> <span t-field="doc.location" /> </td>
+                                <td> <span t-esc="'[' +  str(doc.company_id.name).split('[')[1]" /> </td>
                             </tr>
                         </tbody>
                     </table>

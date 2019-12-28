@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_historycard_document">
+
         <t t-call="web.internal_layout">
             <div class="page">
                 <div class="oe_structure"/>
-                <h2
-                ><center><b>EQUIPMENT REPORT</b></center></h2>
+
+                <h2>
+                    <center>
+                        <b>EQUIPMENT REPORT</b>
+                    </center>
+                </h2>
+
                 <div class="container">
+
                     <table class="table">
                         <tbody>
                             <tr>
@@ -38,65 +45,132 @@
                             <tr>
                                 <th>Company Name</th>
                                 <td> <span t-field="doc.company_id.name" /> </td>
+                                <th>
+                                    Code
+                                </th>
+                                <td>
+                                    <span t-field="doc.internal_ref" />
+                                </td>
+                                  <th>
+                                    Total Expense
+                                </th>
+                                <td>
+                                     <span t-field="doc.total_expense" t-options="{'widget': 'monetary', 'display_currency': doc.company_id.currency_id}" />
+                                </td>
+
                             </tr>
                         </tbody>
                     </table>
 
-
                     <table class="table table-striped">
+
+                        <caption style="caption-side: top;">
+                            Equipment Details
+                        </caption>
+
                         <thead>
+
                             <th> Sno</th>
                             <th> Property </th>
                             <th> Description</th>
+
                         </thead>
                         <tbody>
+
                             <tr t-foreach="doc.property_value_ids" t-as="pr">
-                                <td> <span t-esc="pr_index +1"/> </td>
-                                <td> <span t-field="pr.property_id.name" /> </td>
-                                 <td> <span t-field="pr.property_value" /> </td>
+                                <td>
+                                    <span t-esc="pr_index +1"/>
+                                </td>
+                                <td>
+                                    <span t-field="pr.property_id.name" />
+                                </td>
+                                <td>
+                                    <span t-field="pr.property_value" />
+                                </td>
                             </tr>
+
                         </tbody>
                     </table>
 
-                    <h6>Log Note</h6>
+                    <table class="table table-sm">
+                       <thead>
+                           <caption style="caption-side: top;">Maintenance</caption>
+                            <th> Sno</th>
+                            <th> Subject </th>
+                            <th> Request Date</th>
+                             <th> Amount</th>
+                            <th> Stage</th>
+                       </thead>
+                       <tbody>
+                           <tr t-foreach="doc.maintenance_ids" t-as="m">
+                               <td> <span t-esc="m_index +1"/> </td>
+                               <td> <span t-field="m.name" /> </td>
+                               <td> <span t-field="m.request_date" /> </td>
+                               <td>
+                                   <span t-esc="m.total_expense"
+                                          t-options="{'widget': 'monetary', 'display_currency': doc.company_id.currency_id}"
+                                   />
+                               </td>
+                               <td> <span t-field="m.stage_id" /> </td>
+                           </tr>
+                       </tbody>
+                    </table>
 
-                    <table class="table table-striped">
+                     <table class="table table-sm">
+                       <thead>
+                           <caption style="caption-side: top;">Parts</caption>
+                            <th> Sno</th>
+                            <tH> PO </tH>
+                            <th> Date</th>
+
+                            <th> Item </th>
+                            <th> Qty </th>
+                            <th>  Unit </th>
+                             <th> Amount</th>
+                       </thead>
+                       <tbody>
+                           <tr t-foreach="doc.part_line_ids" t-as="p">
+                               <td> <span t-esc="p_index +1"/> </td>
+                               <td> <span t-field="p.purchase_order_id" /> </td>
+                               <td> <span t-field="p.line_date" /> </td>
+                               <td> <span t-field="p.purchase_order_line_id" /> </td>
+
+                               <td> <span t-field="p.product_qty" /> </td>
+                               <td> <span t-field="p.product_uom" /> </td>
+                               <td>
+                                   <span t-esc="p.price_total"
+                                          t-options="{'widget': 'monetary', 'display_currency': doc.company_id.currency_id}"
+                                   />
+                               </td>
+                           </tr>
+                       </tbody>
+                    </table>
+
+                    <table class="table table-sm">
                         <thead>
+                            <caption style="caption-side: top;">Logs</caption>
                            <!-- <th> Sno</th>-->
                             <th> Date</th>
                             <th> Subject</th>
+                            <th> User</th>
                         </thead>
                         <tbody>
                             <tr t-foreach="doc.message_ids" t-as="msg">
-                                <t t-if="msg.body">
+                                <t t-if="msg.body and msg.message_type =='comment'">
                                     <!--<td> <span t-esc="msg_index +1"/> </td>-->
                                     <td> <span t-field="msg.date" /> </td>
                                     <td> <span t-field="msg.body" /> </td>
+                                    <td> <span t-field="msg.author_id.name" /> </td>
                                 </t>
                             </tr>
                         </tbody>
                     </table>
-                    <h5>Maintenance</h5>
-                    <table class="table table-striped">
-                       <thead>
-                            <th> Sno</th>
-                            <th> Subject </th>
-                            <th> Request Date</th>
-                            <th> Stage</th>
-                       </thead>
-                            <tbody>
-                                <tr t-foreach="doc.maintenance_ids" t-as="m">
-                                    <td> <span t-esc="m_index +1"/> </td>
-                                    <td> <span t-field="m.name" /> </td>
-                                    <td> <span t-field="m.request_date" /> </td>
-                                    <td> <span t-field="m.stage_id" /> </td>
-                                </tr>
-                            </tbody>
-                    </table>
 
                 </div>
+
             </div>
         </t>
+
     </template>
 
     <template id="report_history_card">

@@ -15,7 +15,7 @@
                             <th> Subject</th>
                             <th> Request Date</th>
                             <th> Stage </th>
-                            <th> Company Name</th>
+                            <th> Company</th>
                         </thead>
                         <tbody>
                             <tr t-foreach="docs" t-as="doc">
@@ -25,7 +25,7 @@
                                 <td> <span t-field="doc.name" /></td>
                                 <td> <span t-field="doc.request_date" /> </td>
                                 <td> <span t-field="doc.stage_id.name" /> </td>
-                                <td> <span t-field="doc.company_id.name" /></td>
+                                <td> <span t-esc="'[' +  str(doc.company_id.name).split('[')[1]" /></td>
 
                             </tr>
                         </tbody>
