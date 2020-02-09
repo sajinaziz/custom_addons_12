@@ -35,12 +35,18 @@
     <!--</record>-->
 
 
-    <!--<record id="cicon_equipment_user_identity" model="ir.rule">-->
-        <!--<field name="name">Equipment User Identity Multi company Rule </field>-->
-        <!--<field name="model_id" ref="model_cicon_user_identity"/>-->
-        <!--<field name="domain_force">['|',('company_id','=',False),('company_id','in',user.company_ids.ids)]</field>-->
-        <!--&lt;!&ndash;<field name="groups" eval="[(4, ref('base.group_equipment_manager'))]"/>&ndash;&gt;-->
-    <!--</record>-->
+    <record id="cicon_equipment_user_identity" model="ir.rule">
+        <field name="name">Equipment User Identity Multi company Rule </field>
+        <field name="model_id" ref="model_cicon_user_identity"/>
+        <field name="domain_force">[('company_id.id','in', user.company_ids._ids)]</field>
+    </record>
+
+
+    <record id="cicon_equipment_ip_rule" model="ir.rule">
+        <field name="name">EquipmentIP Multi company Rule </field>
+        <field name="model_id" ref="model_cicon_equipment_ip"/>
+        <field name="domain_force">[('company_id.id','in', user.company_ids._ids)]</field>
+    </record>
 
 
     <!--<record id="hr.group_hr_user" model="res.groups">-->

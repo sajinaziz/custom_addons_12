@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+    <record id="cicon_equipment_ip_line_action" model="ir.actions.act_window">
+            <field name="name">IP</field>
+            <field name="res_model">cicon.equipment.ip.line</field>
+            <field name="domain">[('equipment_ip_id','=', active_id)]</field>
+    </record>
+
+
+    <record model="ir.ui.view" id="cicon_equipment_ip_tree">
+            <field name="name">cicon.equipment.ip.tree</field>
+            <field name="model">cicon.equipment.ip</field>
+            <field name="arch" type="xml">
+                <tree string="Equipment IP" >
+                    <field name="name"/>
+                    <field name="ip_class"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="cicon_equipment_ip_form">
+         <field name="name">cicon.equipment.ip.form</field>
+            <field name="model">cicon.equipment.ip</field>
+            <field name="arch" type="xml">
+                <form string="Equipment IP">
+                    <sheet>
+                         <div class="oe_button_box" name="button_box">
+                            <button name="generate_ip_range" type="object" class="oe_stat_button" icon="fa-check" confirm="Confirm IP List Generation !" string="Generate" />
+                            <button name="%(cicon_equipment_ip_line_action)d" type="action" string="IP" icon="fa-check"/>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="ip_class" placeholder="Eg: 192.168.1.0/24"/>
+                            <field name="company_id"/>
+                        </group>
+                        <notebook>
+                            <page string="IP">
+                                <field name="ip_lines" />
+                            </page>
+                            <page string="IP Equipments">
+                                <field name="ip_equip_lines" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+         </record>
+
+    <record model="ir.ui.view" id="cicon_equipment_ip_line_tree">
+            <field name="name">cicon.equipment.ip.line.tree</field>
+            <field name="model">cicon.equipment.ip.line</field>
+            <field name="arch" type="xml">
+                <tree string="IP" create="false" edit="false" delete="false"  decoration-danger="equip_count > 1">
+                    <field name="name"/>
+                    <field name="ip_assign_type" />
+                    <field name="equipment_id"/>
+                    <field name="status_id"/>
+                    <field name="note"/>
+                    <field name="equip_count" invisible="True"/>
+                </tree>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="cicon_equipment_ip_line_form">
+            <field name="name">cicon.equipment.ip.line.form</field>
+            <field name="model">cicon.equipment.ip.line</field>
+            <field name="arch" type="xml">
+                <form string="IP" create="false" delete="false">
+                    <sheet>
+                        <group>
+                            <group>
+                              <field name="name" readonly="1"/>
+                              <field name="status_id" options="{'no_create': True, 'no_open': True}" />
+                              <field name="ip_assign_type" options="{'no_create': True, 'no_open': True}" />
+                            </group>
+                            <group>
+                                <field name="equipment_id" options="{'no_create': True}"/>
+                                <field name="company_id" options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="note"/>
+                        </group>
+                        <div attrs="{'invisible':[('equip_count','&lt;=' ,1)]}">
+                            <field name="error_msg" />
+                            ( <field name="equip_count" /> )
+                            <field name="equip_ids" widget="many2many_tags" />
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+            </record>
+
+    <record id="cicon_equipment_ip_action" model="ir.actions.act_window">
+            <field name="name">Equipment IP</field>
+            <field name="res_model">cicon.equipment.ip</field>
+       </record>
+
+
+    <menuitem
+            name="Equipment IP"
+            id="cicon_equipment_ip_menu"
+            parent="maintenance.menu_maintenance_configuration"
+            action="cicon_equipment_ip_action"
+            groups="maintenance.group_equipment_manager"
+            sequence="90"
+        />
+
+
+</odoo>

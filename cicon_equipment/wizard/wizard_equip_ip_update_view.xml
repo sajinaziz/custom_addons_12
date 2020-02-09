@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record model="ir.ui.view" id="wizard_equip_ip_assign_form_view">
+         <field name="name">wizard.equip.ip.assign.form</field>
+            <field name="model">wizard.equip.ip.assign</field>
+            <field name="arch" type="xml">
+                <form string="Assign IP Type">
+                    <group>
+                        <group>
+                            <field name="ip_assign_type"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note" />
+                    </group>
+                     <footer>
+                        <button string='Update' name="update_ip_line" confirm="Confirm update on selected IP(s)!" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+
+            </field>
+         </record>
+
+         <act_window
+           id="act_wizard_equip_ip_assign"
+           name="IP Assign Type"
+           view_mode='form'
+           view_id='wizard_equip_ip_assign_form_view'
+           context="{'default_ip_line_ids': active_ids}"
+           res_model="wizard.equip.ip.assign"
+           src_model="cicon.equipment.ip.line"
+           multi="True"
+           target="new"
+         />
+
+
+</odoo>
