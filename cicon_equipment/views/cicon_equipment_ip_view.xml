@@ -29,8 +29,8 @@
                 <form string="Equipment IP">
                     <sheet>
                          <div class="oe_button_box" name="button_box">
-                            <button name="generate_ip_range" type="object" class="oe_stat_button" icon="fa-check" confirm="Confirm IP List Generation !" string="Generate" />
-                            <button name="%(cicon_equipment_ip_line_action)d" type="action" string="IP" icon="fa-check"/>
+                            <button name="generate_ip_range" type="object" class="oe_stat_button" icon="fa-sitemap" confirm="Confirm IP List Generation !" string="Generate" />
+                            <button name="%(cicon_equipment_ip_line_action)d" type="action" string="IP" icon="fa-desktop" />
                         </div>
                         <group>
                             <field name="name"/>
@@ -57,6 +57,7 @@
                 <tree string="IP" create="false" edit="false" delete="false"  decoration-danger="equip_count > 1">
                     <field name="name"/>
                     <field name="ip_assign_type" />
+                    <field name="category_id"/>
                     <field name="equipment_id"/>
                     <field name="status_id"/>
                     <field name="note"/>
@@ -79,7 +80,6 @@
                             </group>
                             <group>
                                 <field name="equipment_id" options="{'no_create': True}"/>
-                                <field name="company_id" options="{'no_create': True, 'no_open': True}"/>
                             </group>
                         </group>
                         <group>

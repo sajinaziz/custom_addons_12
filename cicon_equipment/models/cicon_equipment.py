@@ -40,13 +40,23 @@ class MaintenanceEquipment(models.Model):
         _status = self.env['equipment.status'].search([], order='sequence', limit=1)
         return _status
 
+    def _find_ip_properties(self):
+        _res = []
+        _ip_1 = self.env.ref('cicon_equipment.equipment_default_property_ip').id
+        _ip_2 = self.env['equipment.category.property'].search([('name', '=', 'IP Address (2)')], limit=1)
+        _res.append(_ip_1)
+        if _ip_2:
+            _res.append(_ip_2.id)
+        return _res
+
     @api.multi
     def _get_ip_primary(self):
-        _ip_id = self.env.ref('cicon_equipment.equipment_default_property_ip').id
+        _ip_ids = self._find_ip_properties()
         for rec in self:
             if rec.property_value_ids:
-                _ip_prop = rec.property_value_ids.filtered(lambda a: a.property_id.id == _ip_id).property_value or ''
-                rec.primary_ip = _ip_prop
+                _ip_prop_ids = rec.property_value_ids.filtered(lambda a: a.property_id.id in _ip_ids)
+                if _ip_prop_ids:
+                    rec.primary_ip = ','.join(_ip_prop_ids.mapped('property_value'))
 
     @api.multi
     def _calc_expense(self):
@@ -55,7 +65,7 @@ class MaintenanceEquipment(models.Model):
             _rec.part_line_ids = _lines
             _rec.total_expense = (sum(l.price_total for l in _lines))
 
-    primary_ip = fields.Char(string="IP Address(Primary)",compute=_get_ip_primary)
+    primary_ip = fields.Char(string="IP Address(Primary)", compute=_get_ip_primary)
     internal_ref = fields.Char('Internal Ref', default='New', copy=False)
     property_ids = fields.Many2many(related='category_id.property_ids', store=False, string="Properties")
     property_value_ids = fields.One2many('equipment.property.value', 'equipment_id', string="Property Values")

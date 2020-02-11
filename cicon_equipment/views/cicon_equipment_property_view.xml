@@ -2,14 +2,12 @@
 <odoo>
 
     <data noupdate="1">
-      <record id="equipment_default_property_ip" model="equipment.category.property">
-            <field name="name">IP Address(Primary) </field>
-      </record>
-        </data>
-    <data>
+          <record id="equipment_default_property_ip" model="equipment.category.property">
+                <field name="name">IP Address(Primary) </field>
+          </record>
+    </data>
 
-
-        <record id="hr_equipment_prop_value_tree_view" model="ir.ui.view">
+      <record id="hr_equipment_prop_value_tree_view" model="ir.ui.view">
             <field name="name"> equipment.prop.value.tree.view </field>
             <field name="model">equipment.property.value</field>
             <field name="arch" type="xml">
@@ -38,18 +36,14 @@
             <field name="res_model">equipment.property.value</field>
          </record>
 
-
-
-
-
-               <menuitem
+         <menuitem
                  name="Equipment Property"
                  id="hr_equipment_prop_value_menu"
                  parent="maintenance.menu_maintenance_configuration"
                  action="action_hr_equip_property"
                  groups="maintenance.group_equipment_manager"
                  sequence="90"
-                 />
+         />
 
-    </data>
+
 </odoo>

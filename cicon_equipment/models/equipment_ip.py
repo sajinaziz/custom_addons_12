@@ -43,26 +43,32 @@ class CiconEquipmentIpLine(models.Model):
 
     @api.multi
     def find_equipment(self):
-        _ip_id = self.env.ref('cicon_equipment.equipment_default_property_ip').id
-        _equips = self.env['equipment.property.value'].search([('property_id', '=', _ip_id)]).mapped('equipment_id')
+        _equips = self.env['maintenance.equipment'].search([])
         for rec in self:
-            _eq = _equips.sudo().filtered(lambda r: r.primary_ip == rec.name and r.company_id == self.env.user.company_id)
+            _eq = _equips.sudo().filtered(lambda a: a.primary_ip).filtered(lambda r: rec.name in r.primary_ip.split(','))
             if len(_eq) == 1:
                 rec.equipment_id = _eq.id
             else:
-                rec.error_msg = "Multiple Equipment assigned!"
                 rec.equip_ids = _eq._ids
-                rec.equip_count = len(_eq)
+
+    @api.multi
+    def multi_equipment(self):
+        for rec in self:
+            if rec.equip_ids:
+                rec.equip_count = len(rec.equip_ids)
+                rec.error_msg = "Multiple Equipments found !"
 
     equipment_ip_id = fields.Many2one('cicon.equipment.ip', "IP")
     name = fields.Char(string="IP Address", required=True)
-    equipment_id = fields.Many2one('maintenance.equipment', compute=find_equipment, store=False, string="Equipment")
-    company_id = fields.Many2one('res.company', related='equipment_id.company_id', store=False, string="Company")
+    equipment_id = fields.Many2one('maintenance.equipment', compute=find_equipment, store=False, string="Equipment" )
+    equip_ids = fields.Many2many('maintenance.equipment', compute=find_equipment, string="Multi Equipments",
+                                 store=False)
+    category_id = fields.Many2one('maintenance.equipment.category', related='equipment_id.category_id',
+                                 store=False, string="Category")
     status_id = fields.Many2one('equipment.status', string='Status', related='equipment_id.status_id')
     ip_assign_type = fields.Selection(selection=_IP_ASSIGN_TYPE, string="IP Assign Type")
-    error_msg = fields.Char(string="Error Message !", compute=find_equipment, store=False)
-    equip_ids = fields.Many2many('maintenance.equipment', compute=find_equipment, string="Multi Equipments")
-    equip_count = fields.Integer(compute=find_equipment, string="Equipment Count")
+    error_msg = fields.Char(string="Error Message !", compute=multi_equipment, store=False)
+    equip_count = fields.Integer(compute=multi_equipment, string="Equipment Count", store=False)
     note = fields.Char("Note")
 
 
