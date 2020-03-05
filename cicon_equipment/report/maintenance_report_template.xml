@@ -84,7 +84,7 @@
                         <dt> Logs </dt>
                         <dd class="list-group">
                             <t t-foreach="doc.message_ids" t-as="msg">
-                                <t t-if="msg.body or msg.tracking_value_ids">
+                                <t t-if="msg.body or msg.sudo().tracking_value_ids">
                                 <div class="list-group-item">
                                     <div class="row">
                                         <div class="col-10">
@@ -94,12 +94,12 @@
                                                 <small class="text-right"> <span t-field="msg.date"/> </small>
                                         </div>
                                     </div>
-                                    <t t-if="msg.tracking_value_ids">
+                                    <t t-if="msg.sudo().tracking_value_ids">
                                          <div class="row">
                                              <ul>
-                                                 <li> <span t-field="msg.subtype_id.name" /> </li>
+                                                 <li> <span t-field="msg.sudo().subtype_id.name" /> </li>
                                                  <ul>
-                                                 <t t-foreach="msg.tracking_value_ids" t-as="track">
+                                                 <t t-foreach="msg.sudo().tracking_value_ids" t-as="track">
                                                     <li> <span t-field="track.field_desc" /> :
                                                         <t t-if="track.get_old_display_value()[0]">
                                                             <span t-esc="track.get_old_display_value()[0]"/>
@@ -114,8 +114,8 @@
                                     </t>
                                     <div class="row">
                                       <div class="col-10 mb-1"> By: <span t-field="msg.author_id.name"/> </div>
-                                        <t t-if="msg.attachment_ids">
-                                            <div class="col-2"> <span class="badge badge-pill badge-primary">Attachments <span class="badge badge-light" t-esc="len(msg.attachment_ids)" /> </span> </div>
+                                        <t t-if="msg.sudo().attachment_ids">
+                                            <div class="col-2"> <span class="badge badge-pill badge-primary">Attachments <span class="badge badge-light" t-esc="len(msg.sudo().attachment_ids)" /> </span> </div>
                                         </t>
                                     </div>
 
