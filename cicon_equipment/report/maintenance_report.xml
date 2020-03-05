@@ -11,5 +11,17 @@
             name="cicon_equipment.report_maintenance_request"
 
         />
+
+
+        <report
+            id="action_report_maintenance_request_detail"
+            string="Maintenance Detail"
+            model="maintenance.request"
+            report_type="qweb-html"
+            file="cicon_equipment.report_maintenance_request_detail"
+            name="cicon_equipment.report_maintenance_request_detail"
+
+        />
+
     </data>
 </odoo>

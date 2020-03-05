@@ -92,7 +92,8 @@
                         </tbody>
                     </table>
 
-                    <table class="table table-sm">
+                    <t t-if="doc.maintenance_ids">
+                        <table class="table table-sm">
                        <thead>
                            <caption style="caption-side: top;">Maintenance</caption>
                             <th> Sno</th>
@@ -115,7 +116,10 @@
                            </tr>
                        </tbody>
                     </table>
+                    </t>
 
+
+                    <t t-if="doc.part_line_ids">
                      <table class="table table-sm">
                        <thead>
                            <caption style="caption-side: top;">Parts</caption>
@@ -145,8 +149,11 @@
                            </tr>
                        </tbody>
                     </table>
+                    </t>
 
-                    <table class="table table-sm">
+                    <t t-set="comment_msg" t-value="any(doc.message_ids.filtered(lambda x: x.message_type == 'comment'))"/>
+                    <t t-if="comment_msg">
+                        <table class="table table-sm">
                         <thead>
                             <caption style="caption-side: top;">Logs</caption>
                            <!-- <th> Sno</th>-->
@@ -165,6 +172,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </t>
 
                 </div>
 

@@ -35,6 +35,111 @@
         </t>
     </template>
 
+    <template id="report_maintenance_request_detail_doc">
+        <t t-call="web.html_container">
+             <t t-call="web.internal_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                        <dl>
+                            <dt> <h3> <span class="badge badge-secondary" t-field="doc.stage_id.name" /> </h3>  </dt>
+                            <dt> Title </dt>
+                            <dd> <h2>  <span t-field="doc.name" />  </h2> </dd>
+                            <dt> Description </dt>
+                            <dd> <p class="lead"> <span t-field="doc.description" /> </p> </dd>
+                        </dl>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Created By</th>
+                                <td> <span t-esc="doc.employee_id.display_name" /> </td>
+                                <th>Date</th>
+                                <td> <span t-field="doc.request_date" /> </td>
+                                <th>Type</th>
+                                <td> <span t-field="doc.maintenance_type" /> </td>
+                            </tr>
+                             <tr>
+                                <th>Responsible </th>
+                                <td> <span t-esc="doc.user_id.name" /> </td>
+                                <th>Scheduled Date</th>
+                                <td> <span t-field="doc.schedule_date" /> </td>
+                                <th>Priority</th>
+                                <td> <span t-field="doc.priority"  /> </td>
+                            </tr>
+
+
+                            <tr>
+                                <th>Equipment</th>
+                                <td> <span t-field="doc.equipment_id.name" /> </td>
+                                <th>Category</th>
+                                <td> <span t-field="doc.equipment_id.category_id.name" /> </td>
+                                <th>Model</th>
+                                <td> <span t-field="doc.equipment_id.model" /> </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+                    <dl>
+                        <dt> Logs </dt>
+                        <dd class="list-group">
+                            <t t-foreach="doc.message_ids" t-as="msg">
+                                <t t-if="msg.body or msg.tracking_value_ids">
+                                <div class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-10">
+                                                <h5 class="mb-1"> <span t-field="msg.body"/>   </h5>
+                                        </div>
+                                        <div class="col-2">
+                                                <small class="text-right"> <span t-field="msg.date"/> </small>
+                                        </div>
+                                    </div>
+                                    <t t-if="msg.tracking_value_ids">
+                                         <div class="row">
+                                             <ul>
+                                                 <li> <span t-field="msg.subtype_id.name" /> </li>
+                                                 <ul>
+                                                 <t t-foreach="msg.tracking_value_ids" t-as="track">
+                                                    <li> <span t-field="track.field_desc" /> :
+                                                        <t t-if="track.get_old_display_value()[0]">
+                                                            <span t-esc="track.get_old_display_value()[0]"/>
+                                                            <span class="fa fa-arrow-right"/>
+                                                        </t>
+                                                          <span t-esc="track.get_new_display_value()[0]"/>
+                                                    </li>
+                                                 </t>
+                                                 </ul>
+                                            </ul>
+                                         </div>
+                                    </t>
+                                    <div class="row">
+                                      <div class="col-10 mb-1"> By: <span t-field="msg.author_id.name"/> </div>
+                                        <t t-if="msg.attachment_ids">
+                                            <div class="col-2"> <span class="badge badge-pill badge-primary">Attachments <span class="badge badge-light" t-esc="len(msg.attachment_ids)" /> </span> </div>
+                                        </t>
+                                    </div>
+
+                                </div>
+                                </t>
+                            </t>
+                        </dd>
+                    </dl>
+
+                </div>
+             </t>
+        </t>
+    </template>
+
+
+      <template id="report_maintenance_request_detail">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="cicon_equipment.report_maintenance_request_detail_doc" />
+            </t>
+        </t>
+    </template>
+
+
 
 
 </odoo>
